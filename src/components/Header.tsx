@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
-import { useAppSelector } from "../reducers/hooks";
+import { useAppDispatch, useAppSelector } from "../reducers/hooks";
+import { logout } from "../reducers/authSlice";
 
 const Header: React.FC = () => {
   const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
+  const dispatch = useAppDispatch();
+
   return (
     <header className="bg-blue-500 py-4">
       <div className="container mx-auto px-4 flex justify-between items-center">
@@ -16,6 +19,16 @@ const Header: React.FC = () => {
             </Link>
             <Link to="/cart" className="text-white mx-2">
               Cart
+            </Link>
+            <Link to="/orders" className="text-white mx-2">
+              Orders
+            </Link>
+            <Link
+              to="/signin"
+              className="text-white mx-2"
+              onClick={() => dispatch(logout())}
+            >
+              Logout
             </Link>
           </div>
         ) : (

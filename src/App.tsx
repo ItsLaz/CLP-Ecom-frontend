@@ -5,6 +5,7 @@ import SignUpPage from "./pages/SignUpPage";
 import Header from "./components/Header";
 import ProductsPage from "./pages/ProductsPage";
 import CartPage from "./pages/CartPage.";
+import OrdersPage from "./pages/OrdersPage";
 import { useAppSelector } from "./reducers/hooks";
 
 function App() {
@@ -48,6 +49,16 @@ function App() {
           path="/cart"
           element={
             isAuthenticated ? <CartPage /> : <Navigate replace to={"/signin"} />
+          }
+        />
+        <Route
+          path="/orders"
+          element={
+            isAuthenticated ? (
+              <OrdersPage />
+            ) : (
+              <Navigate replace to={"/signin"} />
+            )
           }
         />
       </Routes>
