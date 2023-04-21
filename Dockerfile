@@ -14,7 +14,7 @@ FROM node:14.16.0
 WORKDIR /app
 
 # Copy the build folder from the build stage
-COPY --from=build /app/build /app/build
+COPY --from=build /app/dist /app/build
 
 # Install the serve package globally
 RUN npm install -g serve
