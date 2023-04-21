@@ -26,7 +26,7 @@ const initialState: AuthState = {
 };
 
 const API = axios.create({
-  baseURL: "http://localhost:8080/api",
+  baseURL: "http://20.117.92.31:4798/api",
 });
 
 export const signUp = createAsyncThunk(

@@ -40,7 +40,7 @@ export const placeOrder = createAsyncThunk(
   "order/placeOrder",
   async (userId: number, { dispatch }) => {
     const response = await axios.post<CustomerOrder>(
-      `http://localhost:8080/api/orders`,
+      `http://20.117.92.31:4798/api/orders`,
       null,
       { params: { userId } }
     );
@@ -53,7 +53,7 @@ export const fetchUserOrders = createAsyncThunk(
   "order/fetchUserOrders",
   async (userId: number) => {
     const response = await axios.get<CustomerOrder[]>(
-      `http://localhost:8080/api/orders/user/${userId}`
+      `http://20.117.92.31:4798/api/orders/user/${userId}`
     );
     return response.data;
   }

@@ -20,7 +20,7 @@ const initialState: ProductState = {
 export const fetchProducts = createAsyncThunk(
   "product/fetchProducts",
   async () => {
-    const response = await axios.get("http://localhost:8080/api/products");
+    const response = await axios.get("http://20.117.92.31:4798/api/products");
     return response.data as Product[];
   }
 );
