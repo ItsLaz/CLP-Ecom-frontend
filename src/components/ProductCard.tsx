@@ -52,7 +52,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           className="w-16 border rounded-md px-2"
           value={quantity}
           min={1}
-          onChange={(e) => setQuantity(parseInt(e.target.value))}
+          onChange={(e) => setQuantity(Math.abs(parseInt(e.target.value)))}
         />
       </div>
       <button
