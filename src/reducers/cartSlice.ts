@@ -27,7 +27,7 @@ export const fetchCartItems = createAsyncThunk(
   "cart/fetchCartItems",
   async (userId: number) => {
     const response = await axios.get(
-      `http://localhost:8080/api/cart/${userId}`
+      `http://20.117.92.31:4798/api/cart/${userId}`
     );
     return response.data as CartItem[];
   }
@@ -38,7 +38,7 @@ export const addToCart = createAsyncThunk(
   async (params: { userId: number; productId: number; quantity: number }) => {
     const { userId, productId, quantity } = params;
     const response = await axios.post(
-      `http://localhost:8080/api/cart/${userId}/${productId}?quantity=${quantity}`
+      `http://20.117.92.31:4798/api/cart/${userId}/${productId}?quantity=${quantity}`
     );
     return response.data as CartItem;
   }
@@ -48,7 +48,7 @@ export const removeOneFromCart = createAsyncThunk(
   "cart/removeOneFromCart",
   async (cartItemId: number) => {
     await axios.delete(
-      `http://localhost:8080/api/cart/${cartItemId}/removeOne`
+      `http://20.117.92.31:4798/api/cart/${cartItemId}/removeOne`
     );
     return cartItemId;
   }
@@ -57,7 +57,7 @@ export const removeOneFromCart = createAsyncThunk(
 export const removeFromCart = createAsyncThunk(
   "cart/removeFromCart",
   async (cartItemId: number) => {
-    await axios.delete(`http://localhost:8080/api/cart/${cartItemId}`);
+    await axios.delete(`http://20.117.92.31:4798/api/cart/${cartItemId}`);
     return cartItemId;
   }
 );
