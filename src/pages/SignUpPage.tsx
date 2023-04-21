@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { signUp } from "../reducers/authSlice";
-import { useAppDispatch } from "../reducers/hooks";
+import { useAppDispatch, useAppSelector } from "../reducers/hooks";
 
 const SignUpPage: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -20,6 +20,9 @@ const SignUpPage: React.FC = () => {
       //error
     }
   };
+
+  const authError = useAppSelector((state) => state.auth.error);
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="w-full max-w-md p-6 bg-white rounded-md shadow-md">
@@ -59,6 +62,7 @@ const SignUpPage: React.FC = () => {
             Sign Up
           </button>
         </form>
+        {authError && <div className="text-red-600 mt-2 mb-4">{authError}</div>}
       </div>
     </div>
   );

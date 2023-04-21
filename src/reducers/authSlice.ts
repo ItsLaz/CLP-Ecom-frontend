@@ -10,6 +10,7 @@ interface User {
 interface AuthState {
   isAuthenticated: boolean;
   user: User;
+  error: string | null;
 }
 
 const initialUser: User = {
@@ -21,6 +22,7 @@ const initialUser: User = {
 const initialState: AuthState = {
   isAuthenticated: false,
   user: initialUser,
+  error: null,
 };
 
 const API = axios.create({
@@ -30,8 +32,12 @@ const API = axios.create({
 export const signUp = createAsyncThunk(
   "auth/signUp",
   async (payload: { username: string; password: string; email: string }) => {
-    const response = await API.post("/user/signup", payload);
-    return response.data;
+    try {
+      const response = await API.post("/user/signup", payload);
+      return response.data;
+    } catch (error) {
+      return error;
+    }
   }
 );
 
@@ -57,16 +63,22 @@ const authSlice = createSlice({
       .addCase(signUp.fulfilled, (state, action) => {
         state.user = action.payload;
         state.isAuthenticated = true;
+        state.error = null;
       })
-      .addCase(signUp.rejected, (state) => {
+      .addCase(signUp.rejected, (state, action) => {
         state.isAuthenticated = false;
+        console.log(state.error);
+        state.error = action.error.message || "Failed to sign up";
       })
       .addCase(signIn.fulfilled, (state, action) => {
         state.user = action.payload;
         state.isAuthenticated = true;
+        state.error = null;
       })
-      .addCase(signIn.rejected, (state) => {
+      .addCase(signIn.rejected, (state, action) => {
         state.isAuthenticated = false;
+        console.log(state.error);
+        state.error = action.error.message || "Failed to sign in";
       });
   },
 });
